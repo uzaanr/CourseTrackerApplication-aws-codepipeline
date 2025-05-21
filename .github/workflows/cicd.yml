@@ -20,17 +20,17 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build docker image
-        run: docker build -t uzaanr/CourseTrackerApplication-aws-codepipeline .
+        run: docker build -t uzaanr/course-tracker-application-aws-codepipeline .
       - name: Publish image to docker hub
-        run: docker push uzaanr/CourseTrackerApplication-aws-codepipeline:latest
+        run: docker push uzaanr/course-tracker-application-aws-codepipeline:latest
 
   deploy:
     needs: build
     runs-on: [aws-ec2]
     steps:
       - name: Pull Image from docker hub
-        run: docker pull uzaanr/CourseTrackerApplication-aws-codepipeline:latest
+        run: docker pull uzaanr/course-tracker-application-aws-codepipeline:latest
       - name: Delete old container
-        run: docker rm -f CourseTrackerApplication-aws-codepipeline-container
+        run: docker rm -f course-tracker-application-aws-codepipeline-container
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name CourseTrackerApplication-aws-codepipeline-container uzaanr/CourseTrackerApplication-aws-codepipeline
+        run: docker run -d -p 8080:8080 --name course-tracker-application-aws-codepipeline-container uzaanr/course-tracker-application-aws-codepipeline
