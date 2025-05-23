@@ -1,4 +1,4 @@
-name: deploy
+name: CICD
 
 on:
   push:
@@ -29,8 +29,8 @@ jobs:
     runs-on: [aws-ec2]
     steps:
       - name: Pull Image from docker hub
-        run: sudo docker pull uzaanr/course-tracker-application-aws-codepipeline:latest
+        run: docker pull uzaanr/course-tracker-application-aws-codepipeline:latest
       - name: Delete old container
         run: docker rm -f course-tracker-application-aws-codepipeline-container
       - name: Run docker container on aws
-        run: sudo docker run -d -p 8080:8080 --name course-tracker-application-aws-codepipeline-container uzaanr/course-tracker-application-aws-codepipeline
+        run: docker run -d -p 8080:8080 --name course-tracker-application-aws-codepipeline-container uzaanr/course-tracker-application-aws-codepipeline
