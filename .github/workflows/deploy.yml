@@ -18,7 +18,7 @@ jobs:
       - name: Build Project
         run: mvn clean install -DskipTests
       - name: Login to docker hub
-        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        run: docker login -u ${{.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build docker image
         run: docker build -t uzaanr/course-tracker-application-aws-codepipeline .
       - name: Publish image to docker hub
@@ -31,6 +31,6 @@ jobs:
       - name: Pull Image from docker hub
         run: sudo docker pull uzaanr/course-tracker-application-aws-codepipeline:latest
       - name: Delete old container
-        run: docker rm -f course-tracker-application-aws-codepipeline-container
+
       - name: Run docker container on aws
-        run: sudo docker run -d -p 8080:8080 --name course-tracker-application-aws-codepipeline-container uzaanr/course-tracker-application-aws-codepipeline
+        run: sudo docker run -d -p 8080:8080 --name course-tracker-applicatirun: docker rm -f course-tracker-application-aws-codepipeline-containeron-aws-codepipeline-container uzaanr/course-tracker-application-aws-codepipeline
